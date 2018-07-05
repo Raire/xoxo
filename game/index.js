@@ -9,7 +9,7 @@ const move = function (aTurn, coor) {
     type: 'move', //Type
     turn: aTurn, //Player
     name: coor, //Position
-    message: `${aTurn}'s move (row,col):` //Message Of Move
+    message: `${aTurn}'s moved: ${coor}` //Message Of Move
   }
   return action
 }
@@ -24,6 +24,7 @@ function reducer(state = { board, turn: 'X' }, action) {
       } else {
         state.turn = 'X'
       }
+      console.log(action.message)
       return state
     default:
       return state
