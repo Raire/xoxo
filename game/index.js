@@ -1,5 +1,7 @@
 import { Map } from 'immutable'
 
+//In Severe Need Of Refactoring
+
 //Empty Initial Board
 const board = Map()
 
@@ -104,11 +106,14 @@ const errorCheck = function (action) {
 function reducer(state = { board, turn: 'X', winner: null }, action) {
   switch (action.type) {
     case 'move':
+
+      //Error Handling
       if (errorCheck(action)) {
         console.log(action.message + ' Is Invalid')
         return state
       }
-
+      
+      //Error Handling
       if (!state.board.getIn(action.name)) {
         state.board = state.board.setIn(action.name, action.turn)
       } else {
@@ -120,6 +125,7 @@ function reducer(state = { board, turn: 'X', winner: null }, action) {
       if (checkHoz(action.name, state.turn) || checkVer(action.name, state.turn) || checkDaiTB(action.name, state.turn) || checkDaiBT(action.name, state.turn)) {
         state.winner = action.turn
       }
+
       //Swap Players
       if (state.turn === 'X') {
         state.turn = 'O'
